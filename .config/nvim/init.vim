@@ -55,6 +55,7 @@ tmap <C-h> <C-\><C-n><C-h>
 tmap <C-j> <C-\><C-n><C-j>
 tmap <C-k> <C-\><C-n><C-k>
 tmap <C-l> <C-\><C-n><C-l>
+tmap jk <C-\><C-n>
 
 "	NERDCommenter
 	nmap  <Plug>NERDCommenterToggle
