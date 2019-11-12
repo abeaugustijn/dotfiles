@@ -13,10 +13,9 @@ set wildmenu number nowrap
 set tabstop=4 shiftwidth=4 noexpandtab autoindent smarttab
 
 colorscheme iceberg
-" colorscheme solarized8_high
-" let solarized_termtrans=1
 syntax on
 filetype plugin on
+set colorcolumn=80
 
 "	other config files
 	source ~/.config/nvim/coc.vim
@@ -25,19 +24,12 @@ filetype plugin on
 call	plug#begin('~/.vim/pluged')
 	Plug	'scrooloose/nerdtree'
 	Plug	'vim-airline/vim-airline'
-	Plug	'aserebryakov/vim-todo-lists'
-	Plug	'geekjuice/vim-mocha'
 	Plug	'neoclide/coc.nvim', {'branch': 'release'}
-	Plug	'mattn/emmet-vim'
 	Plug	'pangloss/vim-javascript'
 	Plug	'pbondoer/vim-42header'
-	Plug	'Shougo/denite.nvim'
-	Plug	'rakr/vim-two-firewatch'
-	Plug	'tpope/vim-fugitive'
 	Plug	'majutsushi/tagbar'
 	Plug	'scrooloose/nerdcommenter'
 	Plug	'airblade/vim-gitgutter'
-	Plug	'nathanaelkane/vim-indent-guides'
 	Plug	'mxw/vim-jsx'
 	Plug	'christoomey/vim-tmux-navigator'
 	Plug	'rhysd/clever-f.vim'
@@ -45,8 +37,10 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'junegunn/fzf.vim'
 	Plug	'junegunn/fzf'
 	Plug	'oblitum/rainbow'
+	Plug	'rakr/vim-two-firewatch'
 call	plug#end()
 
+"	custom binds and pane navigation
 inoremap {<CR> {}<left><CR><CR><up><Tab>
 nnoremap <C-p> <S-v>p
 inoremap jk <Esc>
@@ -57,7 +51,10 @@ inoremap <C-j> <C-j>
 inoremap <C-k> <C-k>
 inoremap <C-l> <C-l>
 
-set colorcolumn=80
+tmap <C-h> <C-\><C-n><C-h>
+tmap <C-j> <C-\><C-n><C-j>
+tmap <C-k> <C-\><C-n><C-k>
+tmap <C-l> <C-\><C-n><C-l>
 
 "	NERDCommenter
 	nmap  <Plug>NERDCommenterToggle
@@ -97,39 +94,33 @@ set colorcolumn=80
 	let g:airline_powerline_fonts = 1
 	let g:airline_theme='twofirewatch'
 
-"	rainbow
-	au FileType c call rainbow#load()
-
 "	find placeholder ("<++>")
-	nnoremap <F12> /<++><CR>df>i
+	nnoremap <F12> /<++><CR>cf>
 	imap <F12> <F12>
 
 "	autocomplete map to F11
 	imap <F11> <C-X><C-K>
 
-"	snippets
-	nnoremap ,c :-1read $HOME/.vim/snippets/stdio.main.c.snippet<CR>3jA
-	nnoremap ,l :-1read $HOME/.vim/snippets/lezingen.snippet<CR>
-	nnoremap ,k :-1read $HOME/.vim/snippets/kalender.snippet<CR>
-	nnoremap ,j :-1read $HOME/.vim/snippets/javascript-import.snippet<CR>
-
 "	ruby
-	au BufNewFile,BufRead *.rb map <F2> :!ruby %<CR>
-
-"	javscript
+	au FileType rb map <F2> :!ruby %<CR>
 
 "	jsx
 	let g:jsx_ext_required = 0
 
 "	c
-	nnoremap m :make<CR>
-	nnoremap M :!./a.out<CR>
+	au FileType c nnoremap m :make<CR>
+	au FileType c nnoremap M :!./a.out<CR>
+	au FileType c nnoremap ,c :-1read $HOME/.vim/snippets/stdio.main.c.snippet<CR>3jA
+	au FileType c call rainbow#load()
 
 "   ejs
-	au BufNewFile,BufRead *.ejs set filetype=html
+	au FileType ejs set filetype=html
+
+"	js
+	au FileType js nnoremap ,j :-1read $HOME/.vim/snippets/javascript-import.snippet<CR>
 
 "	enable man pages plugin
 	runtime ftplugin/man.vim
 
 "	markdown
-	au BufNewFile,BufRead *.md map m :!md2pdf %<CR>
+	au FileType md map m :!md2pdf %<CR>
