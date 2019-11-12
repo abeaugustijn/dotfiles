@@ -1,9 +1,7 @@
 alias ls=ls
-export PATH=$PATH:$HOME/.scripts
+export PATH=$PATH:$HOME/.scripts:$HOME/.brew/bin:$HOME/.apps
 bindkey -v
 export KEYTIMEOUT=1
-export PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
-export PATH=$PATH:/home/abe/.apps
 alias q="exit"
 #alias la="ls --color=auto -la"
 #alias ll="ls --color=auto -l"
