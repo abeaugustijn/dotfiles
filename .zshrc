@@ -1,12 +1,13 @@
+alias ls=ls
 export PATH=$PATH:$HOME/.scripts
 bindkey -v
 export KEYTIMEOUT=1
 export PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
 export PATH=$PATH:/home/abe/.apps
 alias q="exit"
-alias la="ls --color=auto -la"
-alias ll="ls --color=auto -l"
-alias ls="ls --color=auto"
+#alias la="ls --color=auto -la"
+#alias ll="ls --color=auto -l"
+#alias ls="ls --color=auto"
 alias grep="grep --color"
 alias cfvim="vim ~/.vimrc"
 alias cfi3="vim ~/.config/i3/config"

@@ -47,7 +47,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'oblitum/rainbow'
 call	plug#end()
 
-inoremap {<CR> {}<left><CR><CR><up><Tab><Tab>
+inoremap {<CR> {}<left><CR><CR><up><Tab>
 nnoremap <C-p> <S-v>p
 inoremap jk <Esc>
 nnoremap J :w<CR>
