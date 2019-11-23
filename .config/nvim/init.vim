@@ -16,6 +16,8 @@ colorscheme iceberg
 syntax on
 filetype plugin on
 set colorcolumn=80
+set nohlsearch
+set mouse=a
 
 "	other config files
 	source ~/.config/nvim/coc.vim
@@ -27,7 +29,6 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'neoclide/coc.nvim', {'branch': 'release'}
 	Plug	'pangloss/vim-javascript'
 	Plug	'pbondoer/vim-42header'
-	Plug	'majutsushi/tagbar'
 	Plug	'scrooloose/nerdcommenter'
 	Plug	'airblade/vim-gitgutter'
 	Plug	'mxw/vim-jsx'
@@ -38,6 +39,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'junegunn/fzf'
 	Plug	'oblitum/rainbow'
 	Plug	'rakr/vim-two-firewatch'
+	Plug	'Xuyuanp/nerdtree-git-plugin'
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -45,6 +47,7 @@ inoremap {<CR> {}<left><CR><CR><up><Tab>
 nnoremap <C-p> <S-v>p
 inoremap jk <Esc>
 nnoremap J :w<CR>
+nmap <F6> :set number!<CR>
 
 inoremap <C-h> <C-h>
 inoremap <C-j> <C-j>
@@ -90,6 +93,19 @@ tmap jk <C-\><C-n>
 	let g:tagbar_left = 1
 	let g:tagbar_vertical = 10
 
+	let g:NERDTreeIndicatorMapCustom = {
+		\ "Modified"  : "M",
+		\ "Staged"    : "S",
+		\ "Untracked" : "U",
+		\ "Renamed"   : "R",
+		\ "Unmerged"  : "═",
+		\ "Deleted"   : "D",
+		\ "Dirty"     : "M",
+		\ "Clean"     : "C",
+		\ 'Ignored'   : 'I',
+		\ "Unknown"   : "?"
+		\ }
+
 "	vim-airline settings
     set t_Co=256
 	let g:airline_powerline_fonts = 1
@@ -111,8 +127,10 @@ tmap jk <C-\><C-n>
 "	c
 	au FileType c nnoremap m :make<CR>
 	au FileType c nnoremap M :!./a.out<CR>
+	au FileType c nnoremap <C-m> :make test<CR>
 	au FileType c nnoremap ,c :-1read $HOME/.vim/snippets/stdio.main.c.snippet<CR>3jA
 	au FileType c call rainbow#load()
+	au FileType c nnoremap <C-t> yyp0wcesprintf(res, lx
 
 "   ejs
 	au FileType ejs set filetype=html

@@ -1,14 +1,16 @@
 {
 "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".ccls_root"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
-    }
-  }
+		"ccls": {
+			"command": "ccls",
+			"filetypes": ["c", "cpp", "objc", "objcpp"],
+			"rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".ccls_root"],
+			"initializationOptions": {
+				 "cache": {
+					 "directory": "/tmp/ccls"
+				 }
+			 }
+		}
+	},
+	"python.jediEnabled": true,
+	"python.linting.enabled": true
 }
