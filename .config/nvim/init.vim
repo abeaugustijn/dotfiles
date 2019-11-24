@@ -11,6 +11,7 @@
 set encoding=utf-8
 set wildmenu number nowrap
 set tabstop=4 shiftwidth=4 noexpandtab autoindent smarttab
+set clipboard+=unnamedplus
 
 colorscheme iceberg
 syntax on
@@ -40,6 +41,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'oblitum/rainbow'
 	Plug	'rakr/vim-two-firewatch'
 	Plug	'Xuyuanp/nerdtree-git-plugin'
+	Plug	'ryanoasis/vim-devicons'
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -75,6 +77,7 @@ tmap jk <C-\><C-n>
 
 "	reload config shotcut
 	map <M-r> :so ~/.config/nvim/init.vim<CR>
+	map ® :so ~/.config/nvim/init.vim<CR>
 
 "	open specific files in new tab
 	nnoremap <C-c> :tabe ~/.config/nvim/<CR>
