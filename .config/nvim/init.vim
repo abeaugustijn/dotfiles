@@ -18,7 +18,7 @@ syntax on
 filetype plugin on
 set colorcolumn=80
 set nohlsearch
-set mouse=a
+set mouse=
 
 "	other config files
 	source ~/.config/nvim/coc.vim
