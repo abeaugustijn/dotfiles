@@ -4,6 +4,8 @@ export PATH=$PATH:$HOME/.brew/bin
 export PATH=$PATH:$HOME/.apps
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/Users/aaugusti/.scripts
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
 
 #docker-machine config
 eval $(docker-machine env default)

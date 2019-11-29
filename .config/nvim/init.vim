@@ -9,11 +9,10 @@
 
 "	basic settings
 set encoding=utf-8
-set wildmenu number nowrap
+set wildmenu number relativenumber nowrap
 set tabstop=4 shiftwidth=4 noexpandtab autoindent smarttab
 set clipboard+=unnamedplus
 
-colorscheme iceberg
 syntax on
 filetype plugin on
 set colorcolumn=80
@@ -22,11 +21,12 @@ set mouse=
 
 "	other config files
 	source ~/.config/nvim/coc.vim
+	source ~/.config/nvim/colors/iceberg.vim
 
 "	plugins
 call	plug#begin('~/.vim/pluged')
 	Plug	'scrooloose/nerdtree'
-	Plug	'vim-airline/vim-airline'
+	Plug	'itchyny/lightline.vim'
 	Plug	'neoclide/coc.nvim', {'branch': 'release'}
 	Plug	'pangloss/vim-javascript'
 	Plug	'pbondoer/vim-42header'
@@ -42,6 +42,8 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'rakr/vim-two-firewatch'
 	Plug	'Xuyuanp/nerdtree-git-plugin'
 	Plug	'ryanoasis/vim-devicons'
+	Plug	'tpope/vim-surround'
+	Plug	'edkolev/tmuxline.vim'
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -56,6 +58,9 @@ inoremap <C-j> <C-j>
 inoremap <C-k> <C-k>
 inoremap <C-l> <C-l>
 
+"	terminal settings
+nmap <leader>- :sp<CR><C-w>j:set number!<CR>:set relativenumber!<CR>:terminal<CR>A
+nmap <leader>\ :vs<CR><C-w>l:set number!<CR>:set relativenumber!<CR>:terminal<CR>A
 tmap <C-h> <C-\><C-n><C-h>
 tmap <C-j> <C-\><C-n><C-j>
 tmap <C-k> <C-\><C-n><C-k>
@@ -71,6 +76,11 @@ tmap jk <C-\><C-n>
 
 "	fzf
 	nmap <F2> :Files<CR>
+	nmap <F3> :Rg
+	let g:fzf_action = {
+	\ 'ctrl-t': 'tab split',
+	\ 'ctrl-s': 'split',
+	\ 'ctrl-v': 'vsplit' }
 
 "	vscode	
 	nnoremap <leader>ov :exe ':silent !code %'<CR>:redraw!<CR>
@@ -134,6 +144,7 @@ tmap jk <C-\><C-n>
 	au FileType c nnoremap ,c :-1read $HOME/.vim/snippets/stdio.main.c.snippet<CR>3jA
 	au FileType c call rainbow#load()
 	au FileType c nnoremap <C-t> yyp0wcesprintf(res, lx
+	map <leader>c o/*<CR>cc<backspace>**<tab><CR>*/<CR>2kA
 
 "   ejs
 	au FileType ejs set filetype=html
@@ -146,3 +157,7 @@ tmap jk <C-\><C-n>
 
 "	markdown
 	au FileType md map m :!md2pdf %<CR>
+
+"	colorschemes
+	colorscheme default
+	let g:lightline = { 'colorscheme': 'icebergDark' }
