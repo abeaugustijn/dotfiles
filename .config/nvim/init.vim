@@ -15,9 +15,10 @@ set clipboard+=unnamedplus
 
 syntax on
 filetype plugin on
-set colorcolumn=80
 set nohlsearch
 set mouse=
+highlight Pmenu ctermbg=darkgrey
+let mapleader = " "
 
 "	other config files
 	source ~/.config/nvim/coc.vim
@@ -44,6 +45,8 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'ryanoasis/vim-devicons'
 	Plug	'tpope/vim-surround'
 	Plug	'edkolev/tmuxline.vim'
+	Plug	'tpope/vim-fugitive'
+	Plug	'gregsexton/gitv', {'on': ['Gitv']}
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -57,6 +60,8 @@ inoremap <C-h> <C-h>
 inoremap <C-j> <C-j>
 inoremap <C-k> <C-k>
 inoremap <C-l> <C-l>
+
+nmap <leader><leader> <c-^>
 
 "	terminal settings
 nmap <leader>- :sp<CR><C-w>j:set number!<CR>:set relativenumber!<CR>:terminal<CR>A
