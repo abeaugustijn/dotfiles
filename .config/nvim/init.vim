@@ -11,7 +11,7 @@
 set encoding=utf-8
 set wildmenu number relativenumber nowrap
 set tabstop=4 shiftwidth=4 noexpandtab autoindent smarttab
-set clipboard+=unnamedplus
+set clipboard+=unnamed
 
 syntax on
 filetype plugin on
@@ -22,7 +22,6 @@ let mapleader = " "
 
 "	other config files
 	source ~/.config/nvim/coc.vim
-	source ~/.config/nvim/colors/iceberg.vim
 
 "	plugins
 call	plug#begin('~/.vim/pluged')
@@ -47,6 +46,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'edkolev/tmuxline.vim'
 	Plug	'tpope/vim-fugitive'
 	Plug	'gregsexton/gitv', {'on': ['Gitv']}
+	Plug	'arcticicestudio/nord-vim'
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -164,5 +164,5 @@ tmap jk <C-\><C-n>
 	au FileType md map m :!md2pdf %<CR>
 
 "	colorschemes
-	colorscheme default
-	let g:lightline = { 'colorscheme': 'icebergDark' }
+	colorscheme nord
+	let g:lightline = { 'colorscheme': 'nord' }
