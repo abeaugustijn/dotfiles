@@ -22,7 +22,6 @@ let mapleader = " "
 
 "	other config files
 	source ~/.config/nvim/coc.vim
-	source ~/.config/nvim/colors/iceberg.vim
 
 "	plugins
 call	plug#begin('~/.vim/pluged')
@@ -47,6 +46,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'edkolev/tmuxline.vim'
 	Plug	'tpope/vim-fugitive'
 	Plug	'gregsexton/gitv', {'on': ['Gitv']}
+	Plug	'arcticicestudio/nord-vim'
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -108,21 +108,7 @@ tmap jk <C-\><C-n>
 	let NERDTreeDirArrows = 1
 	let NERDTreeQuitOnOpen= 0
 	let NERDTreeChDirMode = 2
-	let g:tagbar_left = 1
-	let g:tagbar_vertical = 10
-
-	let g:NERDTreeIndicatorMapCustom = {
-		\ "Modified"  : "M",
-		\ "Staged"    : "S",
-		\ "Untracked" : "U",
-		\ "Renamed"   : "R",
-		\ "Unmerged"  : "═",
-		\ "Deleted"   : "D",
-		\ "Dirty"     : "M",
-		\ "Clean"     : "C",
-		\ 'Ignored'   : 'I',
-		\ "Unknown"   : "?"
-		\ }
+	let NERDTreeIgnore=['\.o$', '\~$']
 
 "	vim-airline settings
     set t_Co=256
@@ -164,5 +150,7 @@ tmap jk <C-\><C-n>
 	au FileType md map m :!md2pdf %<CR>
 
 "	colorschemes
-	colorscheme default
-	let g:lightline = { 'colorscheme': 'icebergDark' }
+	colorscheme nord
+	let g:lightline = { 'colorscheme': 'nord' }
+
+	set mouse=a
