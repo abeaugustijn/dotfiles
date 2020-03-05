@@ -1,10 +1,15 @@
+# customs
+
+super + c
+	firefox
+
 #
 # wm independent hotkeys
 #
 
 # terminal emulator
 super + Return
-	urxvt -e /bin/zsh
+	gnome-terminal
 
 # program launcher
 super + @space
