@@ -8,6 +8,7 @@ export PATH=$PATH:/home/abe/.cargo/bin
 export PATH=/home/abe/.bin:$PATH
 export PATH=/usr/local/opt/llvm/bin:$PATH
 export SHELL="/bin/zsh"
+export BROWSER="$(which firefox-nightly)"
 
 #random settings which break things if removed
 export KEYTIMEOUT=1
@@ -71,11 +72,12 @@ if tmux ls &> /dev/null; then
 fi
 
 gh () {
-	git remote -v | grep fetch | cut --delimiter=' ' -f1 | cut -f2 | xargs -I{} firefox --new-tab {}
+	git remote -v | grep fetch | cut --delimiter=' ' -f1 | cut -f2 | xargs -I{} $BROWSER --new-tab {}
 }
 
 ghc () {
-	git remote -v | grep fetch | cut --delimiter=' ' -f1 | cut -f2 | xargs -I{} firefox --new-tab {}/commits
+	git remote -v | grep fetch | cut --delimiter=' ' -f1 | cut -f2 | xargs -I{} $BROWSER --new-tab {}/commits
 }
 
 
+alias i="sudo pacman -Sy"

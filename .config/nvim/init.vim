@@ -47,6 +47,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'tpope/vim-fugitive'
 	Plug	'gregsexton/gitv', {'on': ['Gitv']}
 	Plug	'justinmk/vim-syntax-extra'
+	Plug	'nanotech/jellybeans.vim'
 call	plug#end()
 
 "	custom binds and pane navigation
@@ -75,12 +76,13 @@ tmap jk <C-\><C-n>
 "	NERDCommenter
 	nmap  <Plug>NERDCommenterToggle
 	vmap  <Plug>NERDCommenterToggle
+	let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
 
 "	gitgutter
 	nmap <leader>g <Plug>(GitGutterPreviewHunk)
 
 "	fzf
-	nmap <F2> :Files<CR>
+	nnoremap <C-f> :Files<CR>
 	nmap <F3> :Rg
 	let g:fzf_action = {
 	\ 'ctrl-t': 'tab split',
