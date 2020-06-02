@@ -16,8 +16,8 @@ set clipboard+=unnamedplus
 syntax on
 filetype plugin on
 set nohlsearch
-set mouse=
-highlight Pmenu ctermbg=darkgrey
+set mouse=a
+hi Normal ctermbg=none
 let mapleader = " "
 
 "	other config files
@@ -46,14 +46,21 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'edkolev/tmuxline.vim'
 	Plug	'tpope/vim-fugitive'
 	Plug	'gregsexton/gitv', {'on': ['Gitv']}
-	Plug	'arcticicestudio/nord-vim'
+	Plug	'justinmk/vim-syntax-extra'
 	Plug	'justinmk/vim-syntax-extra'
 	Plug	'nanotech/jellybeans.vim'
+	Plug	'mhinz/vim-startify'
+	Plug	'stephpy/vim-php-cs-fixer'
+	Plug	'jwalton512/vim-blade'
+	Plug	'mattn/emmet-vim'
+	Plug	'nelsyeung/twig.vim'
 call	plug#end()
 
 "	custom binds and pane navigation
 inoremap {<CR> {}<left><CR><CR><up><Tab>
 nnoremap <C-p> <S-v>p
+nmap <C-j> }
+nmap <C-k> {
 inoremap jk <Esc>
 nnoremap <S-j> :w<CR>
 nnoremap <C-j> }
@@ -83,6 +90,7 @@ tmap jk <C-\><C-n>
 "	NERDCommenter
 	nmap  <Plug>NERDCommenterToggle
 	vmap  <Plug>NERDCommenterToggle
+	let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
 
 "	gitgutter
 	nmap <leader>g <Plug>(GitGutterPreviewHunk)
@@ -92,9 +100,12 @@ tmap jk <C-\><C-n>
 	nmap <F3> :Rg
 	let g:fzf_action = {
 	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-s': 'split',
-	\ 'ctrl-v': 'vsplit' }
+	\ 'ctrl-s': 'vsplit',
+	\ 'ctrl-h': 'split' }
 	let $FZF_DEFAULT_COMMAND = 'fd --type f'
+
+"	lens
+	let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 
 "	vscode	
 	nnoremap <leader>ov :exe ':silent !code %'<CR>:redraw!<CR>
@@ -117,7 +128,7 @@ tmap jk <C-\><C-n>
 	let NERDTreeDirArrows = 1
 	let NERDTreeQuitOnOpen= 0
 	let NERDTreeChDirMode = 2
-	let NERDTreeIgnore=['\.o$', '\~$']
+	let NERDTreeIgnore=['\.o$', '\~$', 'node_modules', '.php_ch.cache']
 
 "	vim-airline settings
     set t_Co=256
@@ -140,24 +151,48 @@ tmap jk <C-\><C-n>
 "	jsx
 	let g:jsx_ext_required = 0
 
+"	rust
+	autocmd BufWritePre *.rs Format
+
+"	asm
+	let g:asmsyntax = 'nasm'
+
+"	configs
+	autocmd BufWritePost autostart :!./%
+	autocmd BufWritePost .Xresources :!xrdb %
+	autocmd BufWritePost config.h,dwm.c :!make -C $HOME/builds/dwm re
+	autocmd BufWritePost init.vim :so ~/.config/nvim/init.vim
+	autocmd BufWritePost Dockerfile :!./build.sh
+
+
 "	c
-	au FileType c nnoremap m :tabe include/miniRT.h<CR>
-	au FileType c nnoremap M :tabe Makefile<CR>
-	au FileType c nnoremap <C-m> :make<CR>
-	au FileType c nnoremap <C-m> :make test<CR>
-	au FileType c nnoremap ,c :-1read $HOME/.vim/snippets/stdio.main.c.snippet<CR>3jA
 	au FileType c call rainbow#load()
-	au FileType c nnoremap <C-t> yyp0wcesprintf(res, lx
-	map <leader>c o/*<CR>cc<backspace>**<tab><CR>*/<CR>2kA
+	map <leader>c o/*<CR><backspace><backspace><backspace>**<tab><CR>*/<CR><esc>kkA
+	nnoremap <S-s> magg/#*include<CR><S-v>}k:sort<CR>'a
+	nmap <C-s> ma?^{<CR>j<S-v>}k:sort<CR>'a
 
 "   ejs
 	au FileType ejs set filetype=html
+
+"	lock
+	au FileType lock set filetype=json
 
 "	js
 	au FileType js nnoremap ,j :-1read $HOME/.vim/snippets/javascript-import.snippet<CR>
 
 "	enable man pages plugin
 	runtime ftplugin/man.vim
+
+function FixPhp()
+	!php-cs-fixer fix %
+	edit
+endfunction
+
+"	php
+	autocmd BufWritePost *.php silent! call FixPhp()
+
+"	python
+	autocmd BufWritePost *.py :Format
 
 "	markdown
 	au FileType md map m :!md2pdf %<CR>
@@ -166,4 +201,32 @@ tmap jk <C-\><C-n>
 	colorscheme jellybeans
 	let g:lightline = { 'colorscheme': 'jellybeans' }
 
-	set mouse=a
+	let g:jellybeans_overrides = {
+	\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+	\}
+	if has('termguicolors') && &termguicolors
+		let g:jellybeans_overrides['background']['guibg'] = 'none'
+	endif
+	colorscheme jellybeans
+	let g:lightline = { 'colorscheme': 'jellybeans' }
+
+"	set mouse=a if mouse plugged in
+	"let lsusb = system("lsusb | grep Mouse")
+	"if lsusb != ""
+		"set mouse=a
+	"endif
+
+"	42 header
+	let g:hdr42user = "aaugusti"
+	let g:hdr42mail = "aaugusti@student.codam.nl"
+	let g:hdr42asciiart = [
+		\"         ::::::::         ",
+		\"       :+:    :+:         ",
+		\"      +:+                 ",
+		\"     +#+                  ",
+		\"    +#+                   ",
+		\"  #+#    #+#              ",
+		\"  ########   odam.nl      "
+		\]
+
+vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ

@@ -1,0 +1,31 @@
+#! /bin/sh
+
+#xrandr --output HDMI1 --primary &
+#xrandr --output eDP1 --off &
+#xrandr --output DP2 --off &
+
+bspc config merge_overlapping_monitors false
+
+# monitor configuration
+if xrandr | grep "HDMI1 connected"; then
+	sh /home/abe/.screenlayout/2mon.sh &
+	bspc monitor eDP1 -n 0 -d I II III IV V
+	bspc monitor HDMI1 -n 1 -d VI VII VIII IX X
+	sh /home/abe/.config/polybar/launch.sh 1
+else
+	bspc monitor eDP1 -d I II III IV V VI VII VIII IX X
+	sh /home/abe/.config/polybar/launch.sh
+fi
+
+feh --bg-fill $HOME/.wallpapers/wall2.jpg &
+
+sxhkd &
+compton &
+
+bspc config border_width         1
+bspc config window_gap           3
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle	 true
