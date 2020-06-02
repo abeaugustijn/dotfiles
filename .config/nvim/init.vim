@@ -21,7 +21,7 @@ highlight Pmenu ctermbg=darkgrey
 let mapleader = " "
 
 "	other config files
-	source ~/.config/nvim/coc.vim
+source ~/.config/nvim/coc.vim
 
 "	plugins
 call	plug#begin('~/.vim/pluged')
@@ -29,7 +29,7 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'itchyny/lightline.vim'
 	Plug	'neoclide/coc.nvim', {'branch': 'release'}
 	Plug	'pangloss/vim-javascript'
-	Plug	'pbondoer/vim-42header'
+	Plug	'abeaugustijn/vim-42header'
 	Plug	'scrooloose/nerdcommenter'
 	Plug	'airblade/vim-gitgutter'
 	Plug	'mxw/vim-jsx'
@@ -47,14 +47,22 @@ call	plug#begin('~/.vim/pluged')
 	Plug	'tpope/vim-fugitive'
 	Plug	'gregsexton/gitv', {'on': ['Gitv']}
 	Plug	'arcticicestudio/nord-vim'
+	Plug	'justinmk/vim-syntax-extra'
+	Plug	'nanotech/jellybeans.vim'
 call	plug#end()
 
 "	custom binds and pane navigation
 inoremap {<CR> {}<left><CR><CR><up><Tab>
 nnoremap <C-p> <S-v>p
 inoremap jk <Esc>
-nnoremap J :w<CR>
+nnoremap <S-j> :w<CR>
+nnoremap <C-j> }
+nnoremap <C-k> {
 nmap <F6> :set number!<CR>
+
+"	center screen when searching for strings in file
+nnoremap n nzz
+nnoremap <S-n> <S-n>zz
 
 inoremap <C-h> <C-h>
 inoremap <C-j> <C-j>
@@ -80,12 +88,13 @@ tmap jk <C-\><C-n>
 	nmap <leader>g <Plug>(GitGutterPreviewHunk)
 
 "	fzf
-	nmap <F2> :Files<CR>
+	nnoremap <C-f> :Files<CR>
 	nmap <F3> :Rg
 	let g:fzf_action = {
 	\ 'ctrl-t': 'tab split',
 	\ 'ctrl-s': 'split',
 	\ 'ctrl-v': 'vsplit' }
+	let $FZF_DEFAULT_COMMAND = 'fd --type f'
 
 "	vscode	
 	nnoremap <leader>ov :exe ':silent !code %'<CR>:redraw!<CR>
@@ -125,12 +134,16 @@ tmap jk <C-\><C-n>
 "	ruby
 	au FileType rb map <F2> :!ruby %<CR>
 
+"	rust
+	autocmd BufWritePost *.rs :Format	
+
 "	jsx
 	let g:jsx_ext_required = 0
 
 "	c
-	au FileType c nnoremap m :make<CR>
-	au FileType c nnoremap M :!./a.out<CR>
+	au FileType c nnoremap m :tabe include/miniRT.h<CR>
+	au FileType c nnoremap M :tabe Makefile<CR>
+	au FileType c nnoremap <C-m> :make<CR>
 	au FileType c nnoremap <C-m> :make test<CR>
 	au FileType c nnoremap ,c :-1read $HOME/.vim/snippets/stdio.main.c.snippet<CR>3jA
 	au FileType c call rainbow#load()
@@ -150,7 +163,7 @@ tmap jk <C-\><C-n>
 	au FileType md map m :!md2pdf %<CR>
 
 "	colorschemes
-	colorscheme nord
-	let g:lightline = { 'colorscheme': 'nord' }
+	colorscheme jellybeans
+	let g:lightline = { 'colorscheme': 'jellybeans' }
 
 	set mouse=a
