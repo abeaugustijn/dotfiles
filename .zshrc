@@ -37,7 +37,6 @@ source $HOME/.cargo/env
 ogh () {
 	open `git remote -v | grep "fetch" | cut -f2 | awk  '{print $1}'`
 }
-=======
 
 compress() {
 	FILE=$1
